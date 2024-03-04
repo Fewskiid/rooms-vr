@@ -172,7 +172,7 @@ AFRAME.registerComponent('blink-controls', {
     } else {
       this.thumbstickAxisActivation = true
     }
-
+    
     for (i = 0; i < this.data.cancelEvents.length; i++) {
       this.addedEvents.push([this.data.cancelEvents[i], this.cancel])
       el.addEventListener(this.data.cancelEvents[i], this.cancel)
@@ -270,7 +270,7 @@ AFRAME.registerComponent('blink-controls', {
     }
     this.hitEntity.setAttribute('visible', false)
 
-    // If it has rotation on teleport disabled hide the arrow indicating the teleportation direction
+    // If it has rotation on teleport disabled hide the arrow indicating the teleportation direction 
     if (!data.hitEntity) {
       this.hitEntity.lastElementChild.setAttribute('visible', data.rotateOnTeleport);
     }
@@ -452,13 +452,6 @@ AFRAME.registerComponent('blink-controls', {
         rig.object3D.parent.worldToLocal(newRigLocalPosition)
       }
       rig.setAttribute('position', newRigLocalPosition)
-
-      // Added for this boilerplate
-      // Recenter the camera entity on the center of the rig on teleportation
-      if (this.data.cameraRig) {
-        this.teleportOrigin.object3D.position.x = 0;
-        this.teleportOrigin.object3D.position.z = 0;
-      }
 
       // Also take the headset/camera rotation itself into account
       if (this.data.rotateOnTeleport) {
