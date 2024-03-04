@@ -6,15 +6,35 @@ import TheMainRoom from "./TheMainRoom.vue";
 import TheLifeCubeRoom from "./TheLifeCubeRoom.vue";
 import ThePhysicRoom from "./ThePhysicRoom.vue";
 
-defineProps({
-  scale: Number,
-});
+  import '../aframe/simple-grab.js';
+
+  defineProps({
+    scale: Number,
+    overlaySelector: String,
+  });
 
 const allAssetsLoaded = ref(false);
 </script>
 
 <template>
-  <a-scene stats background="color: #52CEEB">
+  <a-scene
+    background="color: black;"
+    :webxr="`
+      requiredFeatures: local-floor;
+      referenceSpaceType: local-floor;
+      optionalFeatures: dom-overlay;
+      overlayElement: ${overlaySelector};
+    `"
+    xr-mode-ui="XRMode: xr"
+    physx="
+      autoLoad: true;
+      delay: 1000;
+      useDefaultScene: false;
+      wasmUrl: lib/physx.release.wasm;
+    "
+    simple-grab
+  >
+
     <a-assets @loaded="allAssetsLoaded = true">
       <img id="clean-sky" src="../../public/assets/clean_sky.png" />
 

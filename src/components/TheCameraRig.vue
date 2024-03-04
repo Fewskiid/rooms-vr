@@ -73,32 +73,19 @@ import PortalTeleporter from "./PortalTeleporter.vue";
     </a-cylinder>
     </a-entity>
 
-    <a-entity
-      id="hand-right"
-      hand-controls="hand: right"
-      laser-controls="hand: right"
-      raycaster="far: 4; objects: [clickable]; showLine: true;"
-      physx-grab
-    >
-      <a-sphere
-        id="hand-right-collider"
-        radius="0.02"
-        visible="false"
-        physx-body="type: kinematic; emitCollisionEvents: true"
+      <a-entity
+        id="hand-right"
+        hand-controls="hand: right"
+        laser-controls="hand: right"
+        raycaster="far: 4; objects: [clickable]; showLine: true;"
+        physx-grab
       >
-      </a-sphere>
-      
-        <!-- <PortalTeleporter
-          label="Teleporter"
-          position="0.05 0 -0.04"
-          rotation="0 135 0"
-          scale="0.2 0.2 0.2"
-          :rot="0"
-          :cameraEffect="true"
-          :cameraY="1.65"
-          :cameraRot="-180"
-          material="src: #room-physic-out-texture"
-        /> -->
-    </a-entity>
+        <a-sphere id="hand-right-collider"
+          radius="0.02"
+          visible="false"
+          physx-body="type: kinematic; emitCollisionEvents: true">
+        </a-sphere>
+      </a-entity>
+
   </a-entity>
 </template>
