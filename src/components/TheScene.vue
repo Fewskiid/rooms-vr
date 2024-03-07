@@ -18,6 +18,7 @@ const allAssetsLoaded = ref(false);
 
 <template>
   <a-scene
+  stats
     background="color: black;"
     :webxr="`
       requiredFeatures: local-floor;
@@ -48,16 +49,42 @@ const allAssetsLoaded = ref(false);
         id="room"
         src="assets/low_poly_isometric_rooms.glb"
       ></a-asset-item>
-      <img
-        id="room-physic-out-texture"
-        :src="`assets/main-room-from-physic-room.png`"
-      />
-      <!--
-        Title: 3D Gallery for VR projects
-        Model source: https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1
-        Model author: https://sketchfab.com/tekuto1s (tekuto1s)
-        Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
-      -->
+      
+      <a-asset-item
+        id="bouteille"
+        src="assets/glass_bottle.glb"
+      ></a-asset-item>
+      
+      <a-asset-item
+        id="trombone"
+        src="assets/paper_clip_collection_.glb_free_low_poly.glb"
+      ></a-asset-item>
+
+      <a-asset-item
+        id="os"
+        src="assets/halloween_bone_low-poly_game_ready.glb"
+      ></a-asset-item>
+
+      <a-asset-item
+        id="radio"
+        src="assets/low_poly_ghetto_blaster.glb"
+      ></a-asset-item>
+
+      <a-asset-item
+        id="arbre_parfum"
+        src="assets/low_poly_fir_tree_decorative_object_free.glb"
+      ></a-asset-item>
+
+      <a-asset-item
+        id="voiture"
+        src="assets/low-poly_truck_drifter.glb"
+      ></a-asset-item>
+
+      <a-asset-item
+        id="portal_gun"
+        src="assets/portal_gun_from_the_rick_and_morty_show.glb"
+      ></a-asset-item>
+
     </a-assets>
 
     <template v-if="allAssetsLoaded">
@@ -65,6 +92,6 @@ const allAssetsLoaded = ref(false);
       <a-sky src="#clean-sky"></a-sky>
     </template>
 
-    <TheCameraRig position="5 4 5" rotation="0 45 0" />
+    <TheCameraRig position="5 2.5 5" rotation="0 225 0" />
   </a-scene>
 </template>

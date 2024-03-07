@@ -21,6 +21,8 @@ import PortalTeleporter from "./PortalTeleporter.vue";
       camera
       position="0 1.65 0"
     >
+      <a-entity id="dummy-hand-right" position="0.3 -0.4 -0.5"></a-entity>
+      <a-entity id="dummy-hand-left" position="-0.3 -0.4 -0.5"></a-entity>
       <a-entity
         geometry="primitive: circle; radius: 0.0003;"
         material="shader: flat; color: white;"
@@ -61,7 +63,7 @@ import PortalTeleporter from "./PortalTeleporter.vue";
         physx-body="type: kinematic; emitCollisionEvents: true"
       >
       </a-sphere>
-      <a-cylinder
+      <!-- <a-cylinder
         id="left-arm"
         position="0 0.2 0"
         rotation="0 0 0"
@@ -70,22 +72,23 @@ import PortalTeleporter from "./PortalTeleporter.vue";
         color="gray"
         physx-body="type: kinematic; emitCollisionEvents: true"
       >
-    </a-cylinder>
+    </a-cylinder> -->
     </a-entity>
 
-      <a-entity
-        id="hand-right"
-        hand-controls="hand: right"
-        laser-controls="hand: right"
-        raycaster="far: 4; objects: [clickable]; showLine: true;"
-        physx-grab
+    <a-entity
+      id="hand-right"
+      hand-controls="hand: right"
+      laser-controls="hand: right"
+      raycaster="far: 4; objects: [clickable]; showLine: true;"
+      physx-grab
+    >
+      <a-sphere
+        id="hand-right-collider"
+        radius="0.02"
+        visible="false"
+        physx-body="type: kinematic; emitCollisionEvents: true"
       >
-        <a-sphere id="hand-right-collider"
-          radius="0.02"
-          visible="false"
-          physx-body="type: kinematic; emitCollisionEvents: true">
-        </a-sphere>
-      </a-entity>
-
+      </a-sphere>
+    </a-entity>
   </a-entity>
 </template>

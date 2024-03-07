@@ -1,15 +1,14 @@
-import { copyPosition, copyRotation } from '../utils/aframe.js';
-import Keyboard from '../utils/keyboard.js';
+import { copyPosition, copyRotation } from "../utils/aframe.js";
+import Keyboard from "../utils/keyboard.js";
 
-
-AFRAME.registerSystem('simple-grab', {
+AFRAME.registerSystem("simple-grab", {
   schema: {
-    handRight: {type: 'selector', default: '#hand-right'},
-    handLeft: {type: 'selector', default: '#hand-left'},
-    dummyHandRight: {type: 'selector', default: '#dummy-hand-right'},
-    dummyHandLeft: {type: 'selector', default: '#dummy-hand-left'},
-    nonVrCursor: {type: 'selector', default: '[cursor]'},
-    leftDummyHandKey: {type: 'string', default: 'ShiftLeft'},
+    handRight: { type: "selector", default: "#hand-right" },
+    handLeft: { type: "selector", default: "#hand-left" },
+    dummyHandRight: { type: "selector", default: "#dummy-hand-right" },
+    dummyHandLeft: { type: "selector", default: "#dummy-hand-left" },
+    nonVrCursor: { type: "selector", default: "[cursor]" },
+    leftDummyHandKey: { type: "string", default: "ShiftLeft" },
   },
 
   init: function () {
@@ -39,9 +38,9 @@ AFRAME.registerSystem('simple-grab', {
   },
 
   getDummyHand: function () {
-    return this.keyboard.isKeyDown(this.data.leftDummyHandKey) ?
-           this.dummyHandLeft :
-           this.dummyHandRight;
+    return this.keyboard.isKeyDown(this.data.leftDummyHandKey)
+      ? this.dummyHandLeft
+      : this.dummyHandRight;
   },
 
   getHand: function (evt) {
@@ -58,14 +57,12 @@ AFRAME.registerSystem('simple-grab', {
       if (!isLeftHand && !isRightHand) return null;
       return cursor;
     }
-  }
-
+  },
 });
 
-AFRAME.registerComponent('simple-grab', {
-
+AFRAME.registerComponent("simple-grab", {
   schema: {
-    event: {type: 'string', default: 'click'},
+    event: { type: "string", default: "click" },
   },
 
   init: function () {
@@ -85,19 +82,22 @@ AFRAME.registerComponent('simple-grab', {
     if (currentGrab) {
       copyPosition(this.el, currentGrab);
       copyRotation(this.el, currentGrab);
-      currentGrab.components['simple-grab'].grabbedBy = null;
+      currentGrab.components["simple-grab"].grabbedBy = null;
       // if the object was in a drop zone, remove it from there
       // and add the grabbed object to the drop zone
       if (this.actualDropZone) {
-        currentGrab.components['simple-grab'].actualDropZone = this.actualDropZone;
-        this.actualDropZone.components['simple-grab-drop-zone'].droppedEl = currentGrab;
+        currentGrab.components["simple-grab"].actualDropZone =
+          this.actualDropZone;
+        this.actualDropZone.components["simple-grab-drop-zone"].droppedEl =
+          currentGrab;
       }
     }
 
     this.system.setCurrentGrab(this.grabbedBy, this.el);
     if (this.actualDropZone) {
       if (!currentGrab) {
-        this.actualDropZone.components['simple-grab-drop-zone'].droppedEl = null;
+        this.actualDropZone.components["simple-grab-drop-zone"].droppedEl =
+          null;
       }
       this.actualDropZone = null;
     }
@@ -111,19 +111,17 @@ AFRAME.registerComponent('simple-grab', {
     if (!this.grabbedBy) return;
     copyPosition(this.grabbedBy, this.el);
     copyRotation(this.grabbedBy, this.el, true);
-  }
-
+  },
 });
 
-AFRAME.registerComponent('simple-grab-drop-zone', {
-
+AFRAME.registerComponent("simple-grab-drop-zone", {
   schema: {
-    dropOnly: {type: 'boolean', default: false},
-    event: {type: 'string', default: 'click'},
+    dropOnly: { type: "boolean", default: false },
+    event: { type: "string", default: "click" },
   },
 
   init: function () {
-    this.system = this.el.sceneEl.systems['simple-grab'];
+    this.system = this.el.sceneEl.systems["simple-grab"];
     this.onEvent = this.onEvent.bind(this);
     this.droppedEl = null;
     this.el.addEventListener(this.data.event, this.onEvent);
@@ -141,19 +139,20 @@ AFRAME.registerComponent('simple-grab-drop-zone', {
 
     // drop the current grab
     if (currentGrab) {
-      currentGrab.components['simple-grab'].grabbedBy = null;
-      currentGrab.components['simple-grab'].actualDropZone = this.el;
+      console.log("dropped!");
+      currentGrab.components["simple-grab"].grabbedBy = null;
+      currentGrab.components["simple-grab"].actualDropZone = this.el;
       this.system.removeCurrentGrab(this.grabbedBy);
       copyPosition(this.el, currentGrab);
       copyRotation(this.el, currentGrab, true);
-      if (this.data.dropOnly) currentGrab.removeAttribute('simple-grab');
+      if (this.data.dropOnly) currentGrab.removeAttribute("simple-grab");
     }
 
     // if something was already in there, put it in the hand
     if (!this.data.dropOnly && this.droppedEl !== null) {
       this.system.setCurrentGrab(this.grabbedBy, this.droppedEl);
-      this.droppedEl.components['simple-grab'].grabbedBy = this.grabbedBy;
-      this.droppedEl.components['simple-grab'].actualDropZone = null;
+      this.droppedEl.components["simple-grab"].grabbedBy = this.grabbedBy;
+      this.droppedEl.components["simple-grab"].actualDropZone = null;
       this.droppedEl = null;
     }
 
@@ -163,5 +162,52 @@ AFRAME.registerComponent('simple-grab-drop-zone', {
   remove: function () {
     this.el.removeEventListener(this.data.event, this.onEvent);
   },
+});
 
+AFRAME.registerComponent("new-drop-zone", {
+  schema: {
+    dropOnly: { type: "boolean", default: false },
+    event: { type: "string", default: "click" },
+  },
+
+  init: function () {
+    this.system = this.el.sceneEl.systems["simple-grab"];
+    this.onEvent = this.onEvent.bind(this);
+    this.droppedEl = null;
+    this.el.addEventListener(this.data.event, this.onEvent);
+  },
+
+  onEvent: function (evt) {
+    // if the event is not from a hand, return
+    this.grabbedBy = this.system.getHand(evt);
+    if (this.grabbedBy === null) return;
+
+    const currentGrab = this.system.getCurrentGrab(this.grabbedBy);
+
+    // disallow dropping if the drop zone is already occupied
+    if (this.data.dropOnly && this.droppedEl !== null) return;
+
+    // drop the current grab
+    if (currentGrab) {
+      console.log("dropped!");
+      currentGrab.components["simple-grab"].grabbedBy = null;
+      currentGrab.components["simple-grab"].actualDropZone = this.el;
+      this.system.removeCurrentGrab(this.grabbedBy);
+      copyPosition(this.el, currentGrab);
+      copyRotation(this.el, currentGrab, true);
+
+      const objId = currentGrab.getAttribute("id");
+      const text = document.querySelector(`#object-${objId}-text`);
+      text.setAttribute("text", "color: lightgreen");
+      currentGrab.remove();
+
+      
+
+      if (this.data.dropOnly) currentGrab.removeAttribute("simple-grab");
+    }
+  },
+
+  remove: function () {
+    this.el.removeEventListener(this.data.event, this.onEvent);
+  },
 });
