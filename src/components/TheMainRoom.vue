@@ -229,6 +229,42 @@ const handleObject = (object) => {
     ></a-text>
   </a-entity>
 
+  <a-entity id="win" position="7.95 4.45 6" rotation="180 90 180" visible="false">
+    <a-plane
+      id="win-list-background"
+      position="0 0 0"
+      rotation="0 0 0"
+      width="2"
+      height="3"
+      color="#000"
+      opacity="0.8"
+    ></a-plane>
+    <a-text
+      value="C'est win ! GG"
+      position="-0.5 1 0.01"
+      color="#FFF"
+      width="3"
+    ></a-text>
+  </a-entity>
+
+  <a-entity id="dropZone-info" position="6 3.6 7.99" rotation="180 0 180">
+    <a-plane
+      id="info-list-background"
+      position="0 0 0"
+      rotation="0 0 0"
+      width="0.6"
+      height="0.3"
+      color="#000"
+      opacity="0.8"
+    ></a-plane>
+    <a-text
+      value="Deposer ici"
+      position="-0.225 0 0.01"
+      color="#FFF"
+      width="2"
+    ></a-text>
+  </a-entity>
+
   <!-- DropZone -->
   <a-entity
     id="drop-zone-right"

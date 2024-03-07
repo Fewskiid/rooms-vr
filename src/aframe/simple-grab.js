@@ -198,10 +198,11 @@ AFRAME.registerComponent("new-drop-zone", {
 
       const objId = currentGrab.getAttribute("id");
       const text = document.querySelector(`#object-${objId}-text`);
+      const listObj = document.querySelector("#object-list");
+      const winGG = document.querySelector("#win");
+
       text.setAttribute("text", "color: lightgreen");
       currentGrab.remove();
-
-      
 
       if (this.data.dropOnly) currentGrab.removeAttribute("simple-grab");
     }
