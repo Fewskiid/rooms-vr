@@ -60,7 +60,7 @@ function playBackgroundMusic() {
         <section>
           <h4>Source code</h4>
           <blockquote>
-            <a href="https://github.com/Fewskiid/rooms-vr">Github repo</a>
+            <a href="https://github.com/Fewskiid/rooms-vr" target="_blank">Github repo</a>
           </blockquote>
         </section>
         <dl>
