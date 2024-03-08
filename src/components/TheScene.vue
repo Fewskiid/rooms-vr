@@ -16,7 +16,6 @@ const allAssetsLoaded = ref(false);
 
 <template>
   <a-scene
-  stats
     background="color: black;"
     :webxr="`
       requiredFeatures: local-floor;
