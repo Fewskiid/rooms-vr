@@ -1,9 +1,9 @@
 <p align="center">
     <img src="./logo.svg" alt="VAV Logo" align="center"/>
 </p>
-<h1 align="center">Vue + A-Frame + Vite boilerplate</h1>
+<h1 align="center">Rooms VR</h1>
 
-> A boilerplate for A-Frame 1.5, Vue 3.4 and Vite 5.0
+> A game for A-Frame 1.5, Vue 3.4 and Vite 5.0
 
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
 ![A-Frame](https://img.shields.io/badge/A%E2%80%93Frame-1.5-brightgreen?style=for-the-badge&labelColor=%23ef2d5e&color=%23ef2d5e)
@@ -12,7 +12,7 @@
 
 ### [>> DEMO <<](https://rooms-vr.netlify.app/)
 
-## Included in the boilerplate
+## Included in the game
 
 ### Libs and components
 
@@ -38,7 +38,7 @@
 ### Clone (or fork, or download)
 
 ```sh
-git clone https://github.com/Chabloz/a-frame-vite-vue-boilerplate.git .
+git clone https://github.com/Fewskiid/rooms-vr.git .
 ```
 
 ### Install dependencies
