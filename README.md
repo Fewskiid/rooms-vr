@@ -27,7 +27,7 @@
 - **Desktop** – Keyboard for move (_WASD_ or Arrows keys) + Mouse for look control (Drag and drop)
 - **Mobile** – 1x Finger touch to go forward + 2x Fingers touch to go backward + Gaze cursor for click
 - **VR/AR** – VR/AR – Walk + Teleport (Grip for grab and laser for click) + Gaze cursor for click
-- - **VR/AR** – Teleport with left hand watch (Laser for click)
+- **VR/AR** – Teleport with left hand watch (Laser for click)
 
 ---
 
