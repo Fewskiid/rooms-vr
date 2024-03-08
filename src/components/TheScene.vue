@@ -3,8 +3,6 @@ import { ref } from "vue";
 
 import TheCameraRig from "./TheCameraRig.vue";
 import TheMainRoom from "./TheMainRoom.vue";
-import TheLifeCubeRoom from "./TheLifeCubeRoom.vue";
-import ThePhysicRoom from "./ThePhysicRoom.vue";
 
   import '../aframe/simple-grab.js';
 
@@ -34,10 +32,16 @@ const allAssetsLoaded = ref(false);
       wasmUrl: lib/physx.release.wasm;
     "
     simple-grab
+    level-manager
   >
 
     <a-assets @loaded="allAssetsLoaded = true">
       <img id="clean-sky" src="../../public/assets/clean_sky.png" />
+      <audio id="background-music" src="assets/background_music.mp3"></audio>
+      <audio id="win-music" src="assets/win_music.mp3"></audio>
+      <audio id="drop-sound" src="assets/drop_sound.mp3"></audio>
+      <audio id="collect-sound" src="assets/collect_sound.mp3"></audio>
+      <audio id="teleport-sound" src="assets/teleport_sound.mp3"></audio>
 
       <!--
         Title: VR Gallery

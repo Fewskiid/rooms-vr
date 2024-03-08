@@ -1,42 +1,58 @@
 AFRAME.registerComponent("level-manager", {
-  schema: {
-    object1Found: { type: "boolean", default: false },
-    object2Found: { type: "boolean", default: false },
-    object3Found: { type: "boolean", default: false },
-    object4Found: { type: "boolean", default: false },
-    object5Found: { type: "boolean", default: false },
-    object6Found: { type: "boolean", default: false },
-    object7Found: { type: "boolean", default: false },
+  schema: {}, // No schema needed in this case
+
+  // Initialize the component
+  init() {
+    // Create an object to store object states
+    this.objects = {
+      "trombone-el": false,
+      "arbre_parfum-el": false,
+      "voiture-el": false,
+      "portal_gun-el": false,
+      "bouteille-el": false,
+      "os-el": false,
+      "radio-el": false,
+    };
+
+    console.log(this.objects); // Log the initial state
+
+    // Loop through object names and add event listeners
+    for (const objectId in this.objects) {
+      if (this.objects.hasOwnProperty(objectId)) {
+        const obj = document.querySelector(`#${objectId}`);
+        if (obj) { // Check if the object element exists
+          obj.addEventListener('has-been-dropped', () => {
+            this.objects[objectId] = true; // Update object state on drop
+            this.checkAllObjectsFound();
+          });
+        } else {
+          console.warn(`Object with ID "${objectId}" not found in the scene.`);
+        }
+      }
+    }
   },
 
-  //Condition
-  init: function () {
-    const objects = [
-      "object1-found",
-      // "object2-found",
-      // "object3-found",
-      // "object4-found",
-      // "object5-found",
-      // "object6-found",
-      // "object7-found",
-    ];
-
-    objects.forEach((eventName) => {
-      this.el.addEventListener(eventName, () => {
-        const objectKey = eventName.replace("-found", "");
-        this.data[objectKey] = true;
-        this.checkAllObjectsFound();
-      });
-    });
-  },
-
-  checkAllObjectsFound: function () {
-    const allObjectsFound = Object.values(this.data).every(
+  // Check if all objects are found
+  checkAllObjectsFound() {
+    const allObjectsFound = Object.values(this.objects).every(
       (value) => value === true
     );
+    console.log(this.objects); // Log the current state
     if (allObjectsFound) {
       console.log("Tous les objets ont été trouvés !");
-      // Ajoutez ici votre logique pour gérer le cas où tous les objets sont trouvés
+      document.querySelector("#win").setAttribute("visible", true);
+      
+      document.querySelector("#object-list").setAttribute("visible", false);
+
+      playWinMusic();
+
+      function playWinMusic() {
+        const oldMusic = document.querySelector("#entity-bg-music");
+        const music = document.querySelector("#entity-win-music");
+        oldMusic.components.sound.stopSound();
+        music.components.sound.playSound();
+      }
+     
     }
   },
 });

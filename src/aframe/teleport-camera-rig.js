@@ -41,6 +41,13 @@ AFRAME.registerComponent('teleport-camera-rig', {
       quaternion.multiply(quaternionToApply);
       this.data.rig.object3D.setRotationFromQuaternion(quaternion);
     }
+    playTeleportSound();
+
+    function playTeleportSound() {
+      const music = document.querySelector("#entity-teleport-sound");
+      music.components.sound.playSound();
+    }
+
   },
 
   update: function (oldData) {

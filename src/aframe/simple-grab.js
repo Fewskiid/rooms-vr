@@ -101,6 +101,13 @@ AFRAME.registerComponent("simple-grab", {
       }
       this.actualDropZone = null;
     }
+
+    playCollectSound();
+
+      function playCollectSound() {
+        const music = document.querySelector("#entity-collect-sound");
+        music.components.sound.playSound();
+      }
   },
 
   remove: function () {
@@ -198,11 +205,19 @@ AFRAME.registerComponent("new-drop-zone", {
 
       const objId = currentGrab.getAttribute("id");
       const text = document.querySelector(`#object-${objId}-text`);
-      const listObj = document.querySelector("#object-list");
-      const winGG = document.querySelector("#win");
+
+      currentGrab.emit("has-been-dropped");
 
       text.setAttribute("text", "color: lightgreen");
+
       currentGrab.remove();
+
+      playDropSound();
+
+      function playDropSound() {
+        const music = document.querySelector("#entity-drop-sound");
+        music.components.sound.playSound();
+      }
 
       if (this.data.dropOnly) currentGrab.removeAttribute("simple-grab");
     }
