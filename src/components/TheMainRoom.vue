@@ -32,19 +32,19 @@ defineProps({
   <!-- DropSound -->
   <a-entity
     id="entity-drop-sound"
-    sound="src: #drop-sound; volume: 1; positional: true"
+    sound="src: #drop-sound; volume: 0.2; positional: true; positional: false"
   ></a-entity>
 
   <!-- CollectSound -->
   <a-entity
     id="entity-collect-sound"
-    sound="src: #collect-sound; volume: 1; positional: true"
+    sound="src: #collect-sound; volume: 0.7; positional: true; positional: false"
   ></a-entity>
 
   <!-- TeleportSound -->
   <a-entity
     id="entity-teleport-sound"
-    sound="src: #teleport-sound; volume: 0.1; positional: true"
+    sound="src: #teleport-sound; volume: 0.05; positional: true; positional: false"
   ></a-entity>
 
   <!-- Rooms -->
