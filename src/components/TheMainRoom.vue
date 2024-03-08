@@ -49,6 +49,7 @@ defineProps({
 
   <!-- Rooms -->
   <a-entity
+    id="main-room"
     gltf-model="#room"
     rotation="0 90 0"
     position="-2 0 -2"
